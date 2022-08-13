@@ -9,6 +9,11 @@ class BaseTask(metaclass=abc.ABCMeta):
     # 单次运行任务
     TASK_RUN_SINGLE = "SINGLE"
     
+    # 单次任务启动之后执行时间点前缀 AFTER_30
+    SINGLE_TASK_RUN_AFTER = "AFTER_"
+    # 单次任务执行时间点前缀 TIME_2022-08-13 22:36:21
+    SINGLE_TASK_RUN_TIME = "TIME_"
+    
     @abc.abstractmethod
     @staticmethod
     def run_type(self,) -> str:
@@ -18,6 +23,17 @@ class BaseTask(metaclass=abc.ABCMeta):
         :return: str
         """
     
+    @abc.abstractmethod
+    @staticmethod
+    def shcd_con(self,) -> str:
+        """
+        返回遍历输出时间表达式
+        
+        :return: str 定时表达式列表
+        """
+        return None
+    
+    @abc.abstractmethod
     @staticmethod
     def loop_msd(self,) -> int:
         """
@@ -27,12 +43,11 @@ class BaseTask(metaclass=abc.ABCMeta):
         """
         return None
     
+    @abc.abstractmethod
     @staticmethod
-    def shcd_con(self,) -> str:
+    def single_tm(self,) -> str:
         """
-        返回遍历输出时间表达式
-        
-        :return: str 定时表达式列表
+        返回单次任务执行时间点
         """
         return None
     
@@ -99,6 +114,7 @@ class BaseTask(metaclass=abc.ABCMeta):
         :return: str 日志文件路径
         """
     
+    @abc.abstractmethod
     @staticmethod
     def logsuccess(self,) -> bool:
         """
@@ -108,6 +124,7 @@ class BaseTask(metaclass=abc.ABCMeta):
         """
         return False
     
+    @abc.abstractmethod
     @staticmethod
     def logfield(self,) -> bool:
         """
@@ -117,6 +134,7 @@ class BaseTask(metaclass=abc.ABCMeta):
         """
         return False
     
+    @abc.abstractmethod
     @staticmethod
     def logabnormal(self,) -> bool:
         """

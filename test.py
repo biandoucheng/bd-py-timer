@@ -1,10 +1,3 @@
-from table import TaskTable
+import datetime
 
-A = TaskTable("bbbbb")
-A.print_s()
-
-B = TaskTable("nnnnn")
-B.print_s()
-
-A.print_s()
-
+print(str(datetime.datetime.now()))

@@ -1,8 +1,7 @@
 import datetime,pytz
 from email.generator import Generator
-from task import BaseTask
+from TaskFactory import BaseTask
 from bdpyconsts import bdpyconsts
-from cron import IsTimeHit
 
 class TaskTable(object):
     # 单例实例
@@ -59,8 +58,25 @@ class TaskTable(object):
         :return: Generator
         """
         for task in self.__schedule_tasks:
-            if IsTimeHit(con=task.shcd_con(),tm=tm):
-                yield task
+            yield task
+    
+    def range_ms_loop_task(self,) -> Generator:
+        """
+        获取毫秒循环任务
+        
+        :return: Generator
+        """
+        for task in self.__loop_tasks:
+            yield task
+    
+    def range_single_task(self,) -> Generator:
+        """
+        获取单次运行任务
+        
+        :return: Generator
+        """
+        for task in self.__single_task:
+            yield task
     
     @classmethod
     def register(self,task:BaseTask):
