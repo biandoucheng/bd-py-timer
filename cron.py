@@ -1,9 +1,5 @@
 # 定时规则
 '''
-1、要求最低维度到秒级
-2、表诉比crontab更清晰
-3、支持多个定时表达式
-
 时间范围表示
 *       每个时间点
 *,*     指定某些时间点
@@ -39,19 +35,6 @@ _TIME_HIT_TIMES_PREG = re.compile(r'^\d+\/\*$')
 _TIME_HIT_RANGE_TIMES_PREG = re.compile(r'^\d+\/\d+\-\d+$')
 #指定范围指定时间点正则
 _TIME_HIT_RANGE_POINT_PREG = re.compile(r'^\d+(\,\d+)+\/\d+\-\d+$')
-
-def IsTimesHit(cons:list,tm:datetime.datetime=None) -> bool:
-    """
-    批量判断时间是否命中
-    
-    :param cons: list 定时表达式列表
-    :param tm: datetime 时间对象
-    :return: bool
-    """
-    for con in cons:
-        if IsTimeHit(con=con,tm=tm):
-            return True
-    return False
 
 def IsTimeHit(con:str,tm:datetime.datetime=None) -> bool:
     """

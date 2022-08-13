@@ -1,4 +1,10 @@
-import datetime
+from table import TaskTable
 
-tm = datetime.datetime.now()
-print(tm.weekday())
+A = TaskTable("bbbbb")
+A.print_s()
+
+B = TaskTable("nnnnn")
+B.print_s()
+
+A.print_s()
+
