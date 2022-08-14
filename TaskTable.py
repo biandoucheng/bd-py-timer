@@ -60,9 +60,9 @@ class TaskTable(object):
         for task in self.__schedule_tasks:
             yield task
     
-    def range_ms_loop_task(self,) -> Generator:
+    def range_sed_loop_task(self,) -> Generator:
         """
-        获取毫秒循环任务
+        获取秒循环任务
         
         :return: Generator
         """

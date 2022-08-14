@@ -2,8 +2,8 @@
 import abc
 
 class BaseTask(metaclass=abc.ABCMeta):
-    # 任务运行模式 毫秒循环
-    TASK_RUN_MS_SECOND_LOOP = "MS_SECOND_LOOP"
+    # 任务运行模式 秒循环
+    TASK_RUN_SECOND_LOOP = "SECOND_LOOP"
     # 任务运行模式 时间表
     TASK_RUN_SCHEDULE = "SCHEDULE"
     # 单次运行任务
@@ -35,11 +35,11 @@ class BaseTask(metaclass=abc.ABCMeta):
     
     @abc.abstractmethod
     @staticmethod
-    def loop_msd(self,) -> int:
+    def loop_sed(self,) -> float:
         """
-        返回毫秒循环的毫秒
+        返回秒循环的秒
         
-        :return: int
+        :return: float
         """
         return None
     
@@ -85,6 +85,15 @@ class BaseTask(metaclass=abc.ABCMeta):
         失败重试次数
         
         :return: int 重试次数|0代表不重试
+        """
+    
+    @abc.abstractmethod
+    @staticmethod
+    def try_after(self,) -> float:
+        """
+        返回重试时间间隔 
+        
+        :return: float
         """
 
     @abc.abstractmethod
