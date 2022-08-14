@@ -37,6 +37,11 @@ class TaskTimer:
         mxw = bdpyconsts.MAX_TASK_THREAD
         if not mxw:
             mxw = 20
+        else:
+            mxw = int(mxw)
+            if mxw < 5:
+                mxw += 5
+        
         self.__pool = ThreadPoolExecutor(max_workers=mxw)
         
     
@@ -73,11 +78,22 @@ class TaskTimer:
             return
         
         last_count = self.__task_stat.run_times
+        sumsed = 0
         while True:
+            # 睡眠等待
             sleep(1)
+            
+            # 统计当前任务执行次数
             current_count = self.__task_stat.run_times
-            if current_count > last_count:
+            
+            # 总体打印
+            if sumsed % 5 == 0:
                 print(self.__task_stat.summary())
+                sumsed = 0
+            sumsed += 1
+            
+            # 单次执行打印
+            if current_count > last_count:
                 print(self.__task_stat.detail(after=last_count - 1))
                 last_count = current_count
     
