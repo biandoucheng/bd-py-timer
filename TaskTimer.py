@@ -1,5 +1,5 @@
 import queue,datetime,pytz
-from time import sleep, time
+from time import sleep
 from retry import retry
 from hashlib import md5
 from TaskFactory import BaseTask
@@ -34,7 +34,10 @@ class TaskTimer:
         self.__task_ids = {}
         
         # 启动线程池管理
-        self.__pool = ThreadPoolExecutor(max_workers=20)
+        mxw = bdpyconsts.MAX_TASK_THREAD
+        if not mxw:
+            mxw = 20
+        self.__pool = ThreadPoolExecutor(max_workers=mxw)
         
     
     def run(self,):
@@ -168,6 +171,7 @@ class TaskTimer:
             del self.__task_ids[task_id]
         
     
+    # TODO 内存,cpu 消耗计算,异常日志记录
     def __task_call_back(self,task:BaseTask,tm=datetime.datetime):
         """
         运行一个任务执行函数
